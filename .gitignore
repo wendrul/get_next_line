@@ -3,3 +3,4 @@
 .DS_Store
 main.c
 *.txt
+*.out

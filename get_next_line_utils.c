@@ -6,7 +6,7 @@
 /*   By: ede-thom <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:15:07 by ede-thom          #+#    #+#             */
-/*   Updated: 2019/11/15 17:08:06 by ede-thom         ###   ########.fr       */
+/*   Updated: 2019/11/15 17:54:55 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_last_from_fd(int fd, t_buf_hist *hist)
 
 	if (*hist == NULL)
 	{
-		if (!(cur = (t_buf_hist)malloc(sizeof(t_buf_hist))))
+		if (!(cur = (t_buf_hist)malloc(sizeof(**hist))))
 			return (NULL);
 		cur->fd = fd;
 		cur->buf[0] = '\0';
@@ -26,13 +26,16 @@ char	*get_last_from_fd(int fd, t_buf_hist *hist)
 		return (cur->buf);
 	}
 	cur = *hist;
+	if (cur->fd == fd)
+		return (cur->buf);
 	while (cur->next)
 	{
 		if (cur-> fd == fd)
 			return (cur->buf);
 		cur = cur->next;
 	}
-	if (!(cur->next = (t_buf_hist)malloc(sizeof(t_buf_hist))))
+	printf("Creating new");
+	if (!(cur->next = (t_buf_hist)malloc(sizeof(**hist))))
 		return (NULL);
 	cur = cur->next;
 	cur->fd = fd;

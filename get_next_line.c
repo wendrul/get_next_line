@@ -6,7 +6,7 @@
 /*   By: ede-thom <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:14:56 by ede-thom          #+#    #+#             */
-/*   Updated: 2019/11/15 17:14:00 by ede-thom         ###   ########.fr       */
+/*   Updated: 2019/11/15 18:05:40 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@ int		ft_strjoin_endl(char **line, char *s2, int *error_no)
 		*error_no = -1;
 		return (1);
 	}
-	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	ft_memmove(new, s1, line_len);
-	ft_memmove(new + line_len + 1, s2, s2_len);
-	new[line_len + s2_len + 1] = '\0';
-	//free(s1);
+	ft_memmove(new + line_len, s2, s2_len);
+	new[line_len + s2_len] = '\0';
+	free(s1);
 	*line = new;
 	if (s2[s2_len] == '\n')
 	{
 		*error_no = 1;
-		//ft_memmove(s2, s2 + s2_len, BUFFER_SIZE - s2_len + 1);
+		while (s2[s2_len] == '\n')
+			s2_len++;
+		ft_memmove(s2, s2 + s2_len, BUFFER_SIZE + 1 - s2_len); 
 		return (1);
 	}
 	s2[0] = '\0';
