@@ -53,12 +53,14 @@ t_buf_hist	remove_fd_from_hist(int fd, t_buf_hist element)
 	if (element->fd == fd)
 	{
 		tmp = element->next;
-		//free(element);
+		free(element);
 		return (tmp);
 	}
 	element->next = remove_fd_from_hist(fd, element->next);
 	return (element);
 }
+
+
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

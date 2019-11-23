@@ -67,9 +67,7 @@ int		ft_strjoin_endl(char **line, char *s2, int *error_no)
 	if (s2[s2_len] == '\n')
 	{
 		*error_no = 1;
-		while (s2[s2_len] == '\n')
-			s2_len++;
-		ft_memmove(s2, s2 + s2_len, BUFFER_SIZE + 1 - s2_len); 
+		ft_memmove(s2, s2 + s2_len + 1, BUFFER_SIZE + 1 - s2_len); 
 		return (1);
 	}
 	s2[0] = '\0';
